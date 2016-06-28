@@ -11,6 +11,7 @@
 #include <ros/time.h>
 #include <geometry_msgs/Quaternion.h>
 #include <std_msgs/Int32.h>
+#include <std_msgs/Bool.h>
 
 ros::NodeHandle nh;
 
@@ -18,6 +19,9 @@ ros::NodeHandle nh;
 //ros::Publisher quat_pub("quaternion", &quat_msg);
 std_msgs::Int32 gas_msg;
 ros::Publisher gas_pub("co2", &gas_msg);
+
+std_msgs::Bool blink_msg;
+ros::Subscriber blink_pub("blink", &blink_pub);
 
 int ret;
 void setup() {
