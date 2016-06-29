@@ -2,10 +2,11 @@
 
 <launch>
 
-  <arg name="port" default="/dev/ttyUSB0"/>
+  <arg name="port" default="/dev/arduinogas"/>
 
   <include file="$(find rosserial_server)/launch/serial.launch">
     <arg name="port" value="$(arg port)" />
+    <remap from="co2" to="co2/rear" />
   </include>
 
 </launch>

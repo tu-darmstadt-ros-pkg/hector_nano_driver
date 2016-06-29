@@ -13,6 +13,8 @@
 #include <std_msgs/Int32.h>
 #include <std_msgs/Bool.h>
 
+void blinkCb(const std_msgs::Bool& msg);
+
 ros::NodeHandle nh;
 
 //geometry_msgs::Quaternion quat_msg;
@@ -20,17 +22,16 @@ ros::NodeHandle nh;
 std_msgs::Int32 gas_msg;
 ros::Publisher gas_pub("co2", &gas_msg);
 
-std_msgs::Bool blink_msg;
-ros::Subscriber blink_pub("blink", &blink_pub);
+ros::Subscriber<std_msgs::Bool> blink_sub("blink", &blinkCb);
 
 int ret;
 void setup() {
   //  Fastwire::setup(400,0);
   //  ret = mympu_open(200);
 
-    nh.initNode();
+  nh.initNode();
 
-  //  nh.advertise(quat_pub);
+  nh.subscribe(blink_sub);
 
   nh.advertise(gas_pub);
 
@@ -66,4 +67,8 @@ void loop() {
     gas_msg.data = analogRead(0);
 
     gas_pub.publish(&gas_msg);
+}
+
+void blinkCb(const std_msgs::Bool& msg){
+    digitalWrite(13, msg.data);   // blink the led
 }

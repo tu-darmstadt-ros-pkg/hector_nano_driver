@@ -9,5 +9,5 @@ add_definitions(-DMPU6050)
 generate_arduino_firmware(nano
   SRCS NANO.cpp ${ROS_LIB_DIR}/time.cpp
   BOARD nano328
-  PORT /dev/ttyUSB0
+  PORT /dev/arduinogas
 )
