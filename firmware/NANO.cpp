@@ -10,7 +10,7 @@
 #include <ros.h>
 #include <ros/time.h>
 #include <geometry_msgs/Quaternion.h>
-#include <std_msgs/Int32.h>
+#include <std_msgs/Float32.h>
 #include <std_msgs/Bool.h>
 
 void blinkCb(const std_msgs::Bool& msg);
@@ -19,7 +19,7 @@ ros::NodeHandle nh;
 
 //geometry_msgs::Quaternion quat_msg;
 //ros::Publisher quat_pub("quaternion", &quat_msg);
-std_msgs::Int32 gas_msg;
+std_msgs::Float32 gas_msg;
 ros::Publisher gas_pub("co2", &gas_msg);
 
 ros::Subscriber<std_msgs::Bool> blink_sub("blink", &blinkCb);
@@ -64,7 +64,7 @@ void loop() {
 
     quat_pub.publish(&quat_msg);
 */
-    gas_msg.data = analogRead(0);
+    gas_msg.data = 1.0 * analogRead(0);
 
     gas_pub.publish(&gas_msg);
 }
